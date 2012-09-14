@@ -1,5 +1,5 @@
-Python module launcher*
------------------------
+Python module launcher
+----------------------
 
 *python-module-launcher* was a failed experiment in improving the
 startup performance of python programs. It was concerned with two
@@ -16,7 +16,8 @@ that are already in ``sys.modules``).
 I ended up trying this approach because of a few small Qt dialogs that
 weren't launching as fast as I would like them too. The results were
 an 100ms reduction in startup time (PySide is a hefty package to
-import).
+import). At that point I abandoned this project (there are a lot of
+unresolved issues such as handling return codes and proper shutdown)
 
 
 Usage
