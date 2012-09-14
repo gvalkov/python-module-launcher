@@ -20,7 +20,7 @@ from lockfile import FileLock
 
 
 usage = '''\
-Usage: %(prog)s [-hvfws] socket [mod, ...]
+Usage: %(prog)s [-hvdpws] socket [mod, ...]
 
 Options:
   -h, --help           show this help message and exit
