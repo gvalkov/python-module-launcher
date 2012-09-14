@@ -24,7 +24,7 @@ classifiers = (
 )
 
 console_scripts = [
-    'python-module-launcher-{0.major}-{0.minor} = modulelauncher:main'\
+    'python-module-launcher-{0.major}.{0.minor} = modulelauncher:main'\
     .format(version_info)]
 
 kw = {
