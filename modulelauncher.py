@@ -41,7 +41,7 @@ Examples:
 
   echo -n "module path.to.module" | nc -U launcher.sock
   echo -n "file path/to/script.py arg1 arg2 | nc -U launcher.sock
-  echo -n  "entrypoint name==0.1.0 console_scripts name arg1 arg2 | ...
+  echo -n  "entrypoint name==0.1.0 console_scripts name arg1 arg2"\
 '''
 
 
