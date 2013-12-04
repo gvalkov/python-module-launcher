@@ -19,7 +19,7 @@ from daemonize import Daemonize
 from lockfile import FileLock
 
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 usage = '''\
 Usage: %(prog)s [-hvdpws] socket [mod, ...]
