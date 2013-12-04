@@ -33,28 +33,43 @@ Options:
   -s, --spare <num>    spare worker processes to maintain (default: 3)
 
 Arguments:
-  socket               location of AF_UNIX socket
-  mod*                 modules to pre-import in every worker
+  socket               path to AF_UNIX socket
+  mod*                 modules to pre-import in workers
 
 Examples:
-  %(prog)s -f launcher.sock numpy PySide.QtCore PySide.QtGui
+  %(prog)s launcher.sock numpy PySide.QtCore
+
   echo -n "module path.to.module" | nc -U launcher.sock
+  echo -n "file path/to/script.py arg1 arg2 | nc -U launcher.sock
+  echo -n  "entrypoint name==0.1.0 console_scripts name arg1 arg2 | ...
 '''
 
 
 def parseopt():
+    if '-h' in argv or '--help' in argv:
+        print(usage % {'prog': path.basename(argv[0])})
+        exit(0)
+
+    if '-v' in argv or '--version' in argv:
+        print('%s version %s' % (path.basename(argv[0]), __version__))
+        exit(0)
+
     p = arg.ArgumentParser(usage=usage, add_help=False)
-    p.formatter_class.format_help = lambda x: usage % {'prog' : p.prog}
 
-    p.add_argument('-h', '--help', action='store_true')
-    p.add_argument('-v', '--version', action='version', version='0.1.0')
-    p.add_argument('-w', '--workers', type=int, default=5)
-    p.add_argument('-d', '--daemonize', action='store_true')
-    p.add_argument('-p', '--pidfile', default='/tmp/python-module-launcher.pid')
-    p.add_argument('-s', '--spare', type=int, default=3)
+    def format_help(self):
+        return usage % {'prog': p.prog}
 
-    p.add_argument('socket')
-    p.add_argument('imports', nargs=arg.REMAINDER, default=None)
+    p.formatter_class.format_help = format_help
+    addarg = p.add_argument
+
+    addarg('-h', '--help', action='help')
+    addarg('-w', '--workers', type=int, default=5)
+    addarg('-d', '--daemonize', action='store_true')
+    addarg('-p', '--pidfile', default='/tmp/python-module-launcher.pid')
+    addarg('-s', '--spare', type=int, default=3)
+
+    addarg('socket')
+    addarg('imports', nargs=arg.REMAINDER, default=None)
 
     return p, p.parse_args()
 
