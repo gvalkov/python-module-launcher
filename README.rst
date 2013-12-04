@@ -25,7 +25,7 @@ Usage
 
 ::
 
-    Usage: python-module-launcher-2.7 [-hvdpws] socket [mod, ...]
+    Usage: python-module-launcher-3.3 [-hvdpws] socket [mod, ...]
 
     Options:
       -h, --help           show this help message and exit
@@ -36,13 +36,15 @@ Usage
       -s, --spare <num>    spare worker processes to maintain (default: 3)
 
     Arguments:
-      socket               location of AF_UNIX socket
-      mod*                 modules to pre-import in every worker
+      socket               path to AF_UNIX socket
+      mod*                 modules to pre-import in workers
 
     Examples:
-      python-module-launcher-2.7 -f launcher.sock numpy PySide.QtCore PySide.QtGui
-      echo -n "module path.to.module" | nc -U launcher.sock
+      python-module-launcher-3.3 launcher.sock numpy PySide.QtCore
 
+      echo -n "module path.to.module" | nc -U launcher.sock
+      echo -n "file path/to/script.py arg1 arg2 | nc -U launcher.sock
+      echo -n  "entrypoint name==0.1.0 console_scripts name arg1 arg2"
 
 You can send the following commands to the unix socket::
 
@@ -55,5 +57,3 @@ License
 =======
 
 This module is released under the terms of the `Revised BSD License`_.
-
-.. _`Revised BSD License`: https://raw.github.com/gvalkov/python-module-launcher/master/LICENSE
