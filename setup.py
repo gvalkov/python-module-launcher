@@ -37,7 +37,7 @@ kw = {
     'url'               : 'https://github.com/gvalkov/python-module-launcher',
     'entry_points'      : {'console_scripts' : console_scripts},
     'py_modules'        : ['modulelauncher'],
-    'install_requires'  : ['argparse', 'python-daemon'],
+    'install_requires'  : ['argparse==1.2.1', 'daemonize==2.2.1', 'lockfile==0.9.1'],
     'zip_safe'          : True,
 }
 

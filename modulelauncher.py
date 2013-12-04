@@ -15,7 +15,7 @@ from importlib import import_module
 from pkg_resources import load_entry_point
 from multiprocessing import Process, Pipe
 
-from daemon import DaemonContext
+from daemonize import Daemonize
 from lockfile import FileLock
 
 
@@ -196,15 +196,10 @@ def main():
         print('+ socket file {} already exists'.format(opts.socket))
         exit(1)
 
-    if opts.help:
-        print(usage, file=stderr)
-        exit(0)
-
     if opts.daemonize:
-        context = DaemonContext(pidfile=FileLock(opts.pidfile))
-        print('+ daemonizing - pid file {}'.format(context.pidfile.path))
-        with context:
-             _main(opts)
+        print('+ daemonizing - pid file {}'.format(opts.pidfile))
+        daemon = Daemonize(app='module_launcher', pid=opts.pidfile, action=lambda: _main(opts))
+        daemon.start()
     else:
         _main(opts)
 
