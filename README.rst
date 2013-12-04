@@ -1,24 +1,24 @@
 Python module launcher
 ----------------------
 
-*python-module-launcher* was a failed experiment in improving the
-startup performance of python programs. It was concerned with two
-things:
+This module tries to improve the start-up time of Python scripts. It
+does so by doing two things:
 
- - eliminate interpreter startup times
- - reduce module import times
+ - Eliminating the time it takes to spawn a new Python process.
+ - Loading modules ahead of time.
 
-Eliminating startup times is achieved by maintaining a pool of worker
-processes. Reducing module load times is achieved by importing modules
-immediately after a worker is spawned (python does not import modules
-that are already in ``sys.modules``).
+Eliminating interpreter start-up time is done by maintaining a pool of
+Python processes. Reducing module load times is done by importing
+modules immediately after a worker is spawned. Python is smart about
+not re-importing modules that are already in ``sys.modules``.
 
-I ended up trying this approach because of a few small Qt dialogs that
-weren't launching as fast as I would like them too. The results were
-an 100ms reduction in startup time (PySide is a hefty package to
-import). At that point I abandoned this project (there are a lot of
-unresolved issues such as handling return codes and proper shutdown)
+I ended up writing this module because of a few small Qt programs that
+weren't launching as fast as I would like them too. The results were a
+~100ms reduction in startup time, which can be attributed to PySide
+being a hefty package to import.
 
+There are plenty of bugs and todos left - handling return code and
+proper process shutdown seem to be on top of the list.
 
 Usage
 =====
@@ -54,4 +54,6 @@ You can send the following commands to the unix socket::
 License
 =======
 
-*python-module-launcher* is released under the terms of the New BSD License.
+This module is released under the terms of the `Revised BSD License`_.
+
+.. _`Revised BSD License`: https://raw.github.com/gvalkov/python-module-launcher/master/LICENSE

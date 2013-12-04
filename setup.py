@@ -7,9 +7,6 @@ from setuptools import setup
 
 here = abspath(dirname(__file__))
 
-requires = ('argparse', 'python-daemon')
-test_requires = ()
-
 classifiers = (
     'Development Status :: 3 - Alpha',
     # 'Development Status :: 5 - Production/Stable',
@@ -28,27 +25,20 @@ console_scripts = [
     .format(version_info)]
 
 kw = {
-    'name'                 : 'module-launcher',
-    'version'              : '0.1.0',
-
-    'description'          : 'reduces startup and import times by maintaining a pool of python processes',
-    'long_description'     : open(pjoin(here, 'README.rst')).read(),
-
-    'author'               : 'Georgi Valkov',
-    'author_email'         : 'georgi.t.valkov@gmail.com',
-
-    'license'              : 'New BSD License',
-
-    'keywords'             : 'module launcher speedup prefork',
-    'classifiers'          : classifiers,
-
-    'url'                  : 'https://github.com/gvalkov/python-module-launcher',
-
-    'entry_points'         : { 'console_scripts' : console_scripts },
-    'py_modules'           : ['modulelauncher'],
-
-    'install_requires'     : requires,
-    'zip_safe'             : True,
+    'name'              : 'module-launcher',
+    'version'           : '0.1.0',
+    'description'       : 'Preforks interpreters to reduce script startup time',
+    'long_description'  : open(pjoin(here, 'README.rst')).read(),
+    'author'            : 'Georgi Valkov',
+    'author_email'      : 'georgi.t.valkov@gmail.com',
+    'license'           : 'Revised BSD License',
+    'keywords'          : 'module launcher speedup prefork',
+    'classifiers'       : classifiers,
+    'url'               : 'https://github.com/gvalkov/python-module-launcher',
+    'entry_points'      : {'console_scripts' : console_scripts},
+    'py_modules'        : ['modulelauncher'],
+    'install_requires'  : ['argparse', 'python-daemon'],
+    'zip_safe'          : True,
 }
 
 if __name__ == '__main__':
