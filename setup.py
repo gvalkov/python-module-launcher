@@ -4,7 +4,6 @@
 from os.path import abspath, dirname, join as pjoin
 from sys import version_info
 from setuptools import setup
-from modulelauncher import __version__
 
 here = abspath(dirname(__file__))
 
@@ -27,7 +26,7 @@ console_scripts = [
 
 kw = {
     'name'              : 'module-launcher',
-    'version'           : __version__,
+    'version'           : '0.2.0',
     'description'       : 'Preforks interpreters to reduce script startup time',
     'long_description'  : open(pjoin(here, 'README.rst')).read(),
     'author'            : 'Georgi Valkov',
