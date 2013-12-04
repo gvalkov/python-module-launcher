@@ -84,7 +84,8 @@ class Worker(Process):
     def run_entrypoint(self, dist, group, name, *args):
         print('+ running entrypoint "{} {} {}" with args "{}"' \
               .format(dist, group, name, args))
-        sys.argv = [name] ; sys.argv.extend(args)
+        sys.argv = [name]
+        sys.argv.extend(args)
 
         return load_entry_point(dist, group, name)()
 
@@ -98,7 +99,8 @@ class Worker(Process):
     def run_module(self, modpath, *args):
         print('+ running module "{}" with args "{}"'.format(modpath, args))
 
-        sys.argv = ['python'] ; sys.argv.extend(args)
+        sys.argv = ['python']
+        sys.argv.extend(args)
         import_module(modpath)
 
     def _run(self):
